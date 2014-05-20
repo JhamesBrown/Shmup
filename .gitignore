@@ -1,0 +1,13 @@
+*.sln
+*.userprefs
+*.csproj
+*.pidb
+*.unityproj
+.DS_Store
+/Library/
+/obj
+/Temp
+*.exe
+*.rar
+*_Data/
+*.user
