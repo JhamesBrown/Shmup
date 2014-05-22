@@ -8,16 +8,16 @@ var dashDuration : float = 0.05;
 var dashModifier : int = 10;
 var dashCoolDown : float = 2;
 
+
+//rigidBody2D movement
+var hoverForce : int = 10;
+
 //shooting
 var shot_pref : Transform;
 var fireRate : float = 0.8;
 @HideInInspector var nextShot : float = 0.0;
 
-// aiming pointer
-var aimPointer_pref : Transform;
-var firingAngle : float;
-@HideInInspector var rotation = Quaternion.identity;
-@HideInInspector var pointer : GameObject;
+
 
 //screenShake effects
 var shake : boolean = false;
@@ -28,10 +28,7 @@ var PlayerGib_pref : Transform;
 
 
 function Start () {
-	
-	// make an aiming pointer on spawn
-	Instantiate(aimPointer_pref, Vector3(transform.position.x, transform.position.y,0), Quaternion.identity);
-	
+
 }
 
 function Update () {
@@ -46,8 +43,8 @@ function Update () {
 		if (transform.position.y < -8.5){
 			transform.position.y = -8.5;
 		}
-		transform.Translate(Vector3(0,(Input.GetAxis("Vertical")) * speed * Time.deltaTime,0));
-		
+		//transform.Translate(Vector3(0,(Input.GetAxis("Vertical")) * speed * Time.deltaTime,0));
+		rigidbody2D.AddForce(Vector3.up * hoverForce * (Input.GetAxis("Vertical")));
 	}
 	
 	if(Input.GetAxis("Horizontal") != 0){
@@ -57,8 +54,8 @@ function Update () {
 		if (transform.position.x < -7.5){
 			transform.position.x = -7.5;
 		}
-		transform.Translate(Vector3((Input.GetAxis("Horizontal")) * speed * Time.deltaTime,0,0));
-		
+		//transform.Translate(Vector3((Input.GetAxis("Horizontal")) * speed * Time.deltaTime,0,0));
+		rigidbody2D.AddForce(Vector3.right * hoverForce * (Input.GetAxis("Horizontal")));
 	}
 	
 // dash rewrite
@@ -73,7 +70,7 @@ function Update () {
 //shooting		
 	if (Input.GetAxis("Fire1")){
 		if (Time.time >= nextShot){
-			Instantiate(shot_pref, Vector3(transform.position.x, transform.position.y,0), rotation) ;
+			Instantiate(shot_pref, Vector3(transform.position.x, transform.position.y,0), Quaternion.identity);
 	
 			nextShot = Time.time + fireRate;
 			shakeTime = Time.time;
@@ -85,27 +82,7 @@ function Update () {
 
 	
 	
-//this section controls the firing angle
-	if (Input.GetAxis("rightX") != 0){
-		if (Input.GetAxis("rightX") > 0.05) {
-			firingAngle = 270;
-			
-				if (Input.GetAxis("rightY") != 0) {
-				firingAngle -= 90 * Input.GetAxis("rightY");
-				}
-			
-		}
-			
-		if (Input.GetAxis("rightX") < -0.05) {
-			firingAngle = 90;
-		
-				if (Input.GetAxis("rightY") != 0) {
-				firingAngle += 90 * Input.GetAxis("rightY");
-				}
-		}
-		rotation.eulerAngles = Vector3(0, 0, firingAngle);
-		
-	}
+
 			
 //screen shake		
 	if (shake && Time.time < shakeTime + shakeDuration){
@@ -120,15 +97,14 @@ function Update () {
 		
 }
 
-function OnCollisionEnter (col : Collision){
+function OnCollisionEnter2D (col : Collision2D){
 
 	if(col.gameObject.tag =="Enemy"){
 			
 			Destroy(col.gameObject);
 			Destroy(gameObject);
 			
-			pointer = GameObject.FindGameObjectWithTag("Aiming_Pointer");
-			Destroy(pointer.gameObject);
+			
 			for (var i = 0; i < 200; i++){
 				Instantiate(PlayerGib_pref, Vector3(transform.position.x, transform.position.y,0), Quaternion.identity);
 			}
@@ -144,6 +120,10 @@ function dashFunction(){
 	dash = false;
 }
 
+//will change the sprite to the appropriate stage of movement and direction
+function spriteMovement (movementState, rotation) {
+	
+}
 
 
 	
