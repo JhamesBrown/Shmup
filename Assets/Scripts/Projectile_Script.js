@@ -1,12 +1,21 @@
 ﻿#pragma strict
 var shotForce : int;
+var anim : Animator;
 
 
 function Start () {
-	shotForce = 300;
+	shotForce = 350;
+	
+	anim = GetComponent("Animator");
 	rigidbody2D.AddForce(Vector3.up * shotForce);
 }
 
 function Update () {
+	
+}
 
+function OnCollisionEnter2D (col : Collision2D) {
+	anim.SetInteger("hit", 1);
+	yield WaitForSeconds(0.3);
+	Destroy(gameObject);
 }
