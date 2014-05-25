@@ -4,17 +4,18 @@ var speed : int = 8;
 
 //dash
 var dash : boolean = false;
-var dashDuration : float = 0.05;
+var dashDuration : float = 0.01;
 var dashModifier : int = 10;
 var dashCoolDown : float = 2;
 
 
 //rigidBody2D movement
 var hoverForce : int = 10;
+var velocity : Vector2;
 
 //shooting
 var shot_pref : Transform;
-var fireRate : float = 0.8;
+var fireRate : float = 0.2;
 @HideInInspector var nextShot : float = 0.0;
 
 
@@ -32,8 +33,9 @@ function Start () {
 }
 
 function Update () {
-	
 
+velocity = rigidbody2D.velocity;
+//Debug.Log(velocity);
 
 //player movement and playable area limits
 	if(Input.GetAxis("Vertical") != 0){
@@ -48,12 +50,12 @@ function Update () {
 	}
 	
 	if(Input.GetAxis("Horizontal") != 0){
-		if (transform.position.x > 7.5){
-			transform.position.x = 7.5;
-		}
-		if (transform.position.x < -7.5){
-			transform.position.x = -7.5;
-		}
+//		if (transform.position.x > 7.5){
+//			transform.position.x = 7.5;
+//		}
+//		if (transform.position.x < -7.5){
+//			transform.position.x = -7.5;
+//		}
 		//transform.Translate(Vector3((Input.GetAxis("Horizontal")) * speed * Time.deltaTime,0,0));
 		rigidbody2D.AddForce(Vector3.right * hoverForce * (Input.GetAxis("Horizontal")));
 	}
@@ -70,7 +72,7 @@ function Update () {
 //shooting		
 	if (Input.GetAxis("Fire1")){
 		if (Time.time >= nextShot){
-			Instantiate(shot_pref, Vector3(transform.position.x, transform.position.y,0), Quaternion.identity);
+			Instantiate(shot_pref, Vector3(transform.position.x, transform.position.y + 0.5,0), Quaternion.identity);
 	
 			nextShot = Time.time + fireRate;
 			shakeTime = Time.time;
@@ -85,15 +87,14 @@ function Update () {
 
 			
 //screen shake		
-	if (shake && Time.time < shakeTime + shakeDuration){
-		Camera.main.transform.Translate(Vector3(Random.Range(-0.05,0.05),Random.Range(-0.05,0.05),0));
-	}
-	else
-	{
-		shake = false;
-		Camera.main.transform.position = (Vector3(transform.position.x / 3, transform.position.y / 3, -10));
-	}
-	
+//	if (shake && Time.time < shakeTime + shakeDuration){
+//		Camera.main.transform.Translate(Vector3(Random.Range(-0.02,0.02),Random.Range(-0.02,0.02),0));
+//	}
+//	else
+//	{
+//		shake = false;
+//		Camera.main.transform.position = (Vector3(transform.position.x / 3, transform.position.y / 3, -10));
+//	}
 		
 }
 
