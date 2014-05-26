@@ -1,6 +1,6 @@
 ﻿#pragma strict
 
-var speed : int = 8;
+var speed : int = 15;
 
 //dash
 var dash : boolean = false;
@@ -10,7 +10,7 @@ var dashCoolDown : float = 2;
 
 
 //rigidBody2D movement
-var hoverForce : int = 10;
+var hoverForce : int = 30;
 var velocity : Vector2;
 
 //shooting
@@ -60,6 +60,17 @@ velocity = rigidbody2D.velocity;
 		rigidbody2D.AddForce(Vector3.right * hoverForce * (Input.GetAxis("Horizontal")));
 	}
 	
+	
+//reduce the hoverforce when 2 keys are pressed so that it doesnt move faster on diagonals
+	if(Input.GetAxis("Horizontal") != 0 && Input.GetAxis("Vertical") != 0) {
+		if (hoverForce == 30) {
+			hoverForce *= 0.7;
+		}
+	}
+	else {
+		hoverForce = 30;
+	}
+	
 // dash rewrite
 	if (dash == false){
 		if (Input.GetAxis("Dash")){
@@ -72,7 +83,7 @@ velocity = rigidbody2D.velocity;
 //shooting		
 	if (Input.GetAxis("Fire1")){
 		if (Time.time >= nextShot){
-			Instantiate(shot_pref, Vector3(transform.position.x, transform.position.y + 1.4,0), Quaternion.identity);
+			Instantiate(shot_pref, Vector3(transform.position.x, transform.position.y + 1.0,0), Quaternion.identity);
 	
 			nextShot = Time.time + fireRate;
 			shakeTime = Time.time;
