@@ -83,7 +83,7 @@ velocity = rigidbody2D.velocity;
 //shooting		
 	if (Input.GetAxis("Fire1")){
 		if (Time.time >= nextShot){
-			Instantiate(shot_pref, Vector3(transform.position.x, transform.position.y + 1.0,0), Quaternion.identity);
+			Instantiate(shot_pref, Vector3(transform.position.x, transform.position.y + 0.5,0), Quaternion.identity);
 	
 			nextShot = Time.time + fireRate;
 			shakeTime = Time.time;
