@@ -1,4 +1,4 @@
-﻿#pragma strict
+#pragma strict
 var health : int;
 var testGib_pref : Transform;
 
@@ -13,11 +13,11 @@ function Update () {
 	}
 }
 function OnCollisionEnter2D (col : Collision2D) {
-	
+
 	if(col.gameObject.tag =="Projectile") {
 		health -= 10;
 	}
-	
+
 	if(col.gameObject.tag =="Wall" && col != null) {
 		health = 0;
 	}
@@ -25,8 +25,17 @@ function OnCollisionEnter2D (col : Collision2D) {
 
 function onDeath() {
 	for (var i = 0; i < 15; i++){
-			// Instantiate(testGib_pref, Vector2(transform.position.x, transform.position.y), Quaternion.identity);
-			Instantiate(testGib_pref, Vector2(transform.position.x + Random.Range(-0.1, 0.1) , transform.position.y + Random.Range(-0.1, 0.1)), Quaternion.identity);
+			Instantiate(testGib_pref, Vector2( AddNoiseToXPosition(), AddNoiseToYPosition()), Quaternion.identity);
 	}
 	Destroy(gameObject);
+}
+
+function AddNoiseToXPosition(){
+  return transform.position.x + Random.Range(-0.1, 0.1);
+
+}
+
+function AddNoiseToYPosition(){
+  return transform.position.y + Random.Range(-0.1, 0.1);
+
 }

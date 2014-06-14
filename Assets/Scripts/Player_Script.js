@@ -42,23 +42,14 @@ function Start () {
 function Update () {
 
 velocity = rigidbody2D.velocity;
-//Debug.Log(velocity);
 
 //player movement and playable area limits
 	if(MovingVertically()){
 		CheckVerticalBounds();
-		//transform.Translate(Vector3(0,(Input.GetAxis("Vertical")) * speed * Time.deltaTime,0));
 		rigidbody2D.AddForce(Vector3.up * hoverForce * (Input.GetAxis("Vertical")));
 	}
 
 	if(MovingHorizontally()){
-//		if (transform.position.x > 7.5){
-//			transform.position.x = 7.5;
-//		}
-//		if (transform.position.x < -7.5){
-//			transform.position.x = -7.5;
-//		}
-		//transform.Translate(Vector3((Input.GetAxis("Horizontal")) * speed * Time.deltaTime,0,0));
 		rigidbody2D.AddForce(Vector3.right * hoverForce * (Input.GetAxis("Horizontal")));
 	}
 
@@ -124,6 +115,7 @@ function OnCollisionEnter2D (col : Collision2D){
 
 
 			for (var i = 0; i < 200; i++){
+        Debug.Log("creating 200 of something");
 				Instantiate(PlayerGib_pref, Vector3(transform.position.x, transform.position.y,0), Quaternion.identity);
 			}
 	}
