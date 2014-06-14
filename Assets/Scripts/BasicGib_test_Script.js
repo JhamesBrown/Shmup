@@ -14,8 +14,8 @@ function Start () {
 
 function Update () {
 	if (rigidbody2D.velocity.x == 0 && rigidbody2D.velocity.y == 0){
-		rigidbody2D.AddForce(transform.right * 100 * GetRandomDirection());
-		rigidbody2D.AddForce(transform.up * 100 * GetRandomDirection());
+		rigidbody2D.AddForce(Vector2.right * 100 * GetRandomDirection());
+		rigidbody2D.AddForce(Vector2.up * 100 * GetRandomDirection());
 	}
 }
 

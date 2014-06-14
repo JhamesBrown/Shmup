@@ -44,9 +44,13 @@ function Update () {
 velocity = rigidbody2D.velocity;
 
 //player movement and playable area limits
-  var rotation = Quaternion();
-  rotation.SetLookRotation( Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"),0),Vector3.up);
-  transform.localRotation = rotation;
+  if(MovingVertically() || MovingHorizontally())
+     {
+       //reset heading direction to current input
+      var rotation = Quaternion();
+      rotation.SetLookRotation( Vector3( Input.GetAxis("Vertical"),Input.GetAxis("Horizontal"),0),Vector3.up);
+      transform.localRotation = rotation;
+    }
 
 	if(MovingVertically()){
 		CheckVerticalBounds();
@@ -82,7 +86,7 @@ velocity = rigidbody2D.velocity;
 //shooting
 	if (Input.GetAxis("Fire1")){
 		if (Time.time >= nextShot){
-			Instantiate(shot_pref, Vector3(transform.position.x * 1.3, transform.position.y * 1.3, 0), transform.rotation);
+			Instantiate(shot_pref, Vector3(transform.position.x, transform.position.y , 0), rotation);
 
 			nextShot = Time.time + fireRate;
 			shakeTime = Time.time;
