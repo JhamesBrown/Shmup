@@ -14,6 +14,8 @@ var dashCoolDown : float = 2;
 static var HOVER_FORCE_MODIFIER : float = 0.707;
 static var BASE_HOVER_FORCE : int = 30;
 
+static var HALF_WIDTH : float = 8.5;
+
 //rigidBody2D movement
 var hoverForce : int = 30;
 var velocity : Vector2;
@@ -43,18 +45,13 @@ velocity = rigidbody2D.velocity;
 //Debug.Log(velocity);
 
 //player movement and playable area limits
-	if(Input.GetAxis("Vertical") != 0){
-		if (transform.position.y > 8.5){
-			transform.position.y = 8.5;
-		}
-		if (transform.position.y < -8.5){
-			transform.position.y = -8.5;
-		}
+	if(MovingVertically()){
+		CheckVerticalBounds();
 		//transform.Translate(Vector3(0,(Input.GetAxis("Vertical")) * speed * Time.deltaTime,0));
 		rigidbody2D.AddForce(Vector3.up * hoverForce * (Input.GetAxis("Vertical")));
 	}
-	
-	if(Input.GetAxis("Horizontal") != 0){
+
+	if(MovingHorizontally()){
 //		if (transform.position.x > 7.5){
 //			transform.position.x = 7.5;
 //		}
@@ -116,13 +113,7 @@ velocity = rigidbody2D.velocity;
 
 }
 
-function MovingHorizontally(){
-    return Input.GetAxis("Horizontal") != 0;
-}
 
-function MovingVertically(){
-    return Input.GetAxis("Vertical") != 0;
-}
 
 function OnCollisionEnter2D (col : Collision2D){
 
@@ -152,6 +143,23 @@ function spriteMovement (movementState, rotation) {
 
 }
 
+//helper functions
+function MovingHorizontally(){
+    return Input.GetAxis("Horizontal") != 0;
+}
+
+function MovingVertically(){
+    return Input.GetAxis("Vertical") != 0;
+}
+function CheckVerticalBounds(){
+    if (transform.position.y > HALF_WIDTH){
+			transform.position.y = HALF_WIDTH;
+		}
+		else if (transform.position.y < -HALF_WIDTH){
+			transform.position.y = -HALF_WIDTH;
+		}
+
+}
 
 
 
