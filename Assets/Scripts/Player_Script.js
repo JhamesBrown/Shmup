@@ -44,15 +44,19 @@ function Update () {
 velocity = rigidbody2D.velocity;
 
 //player movement and playable area limits
+  var rotation = Quaternion();
+  rotation.SetLookRotation( Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"),0),Vector3.up);
+  transform.localRotation = rotation;
+
 	if(MovingVertically()){
 		CheckVerticalBounds();
 		rigidbody2D.AddForce(Vector3.up * hoverForce * (Input.GetAxis("Vertical")));
+
 	}
 
 	if(MovingHorizontally()){
 		rigidbody2D.AddForce(Vector3.right * hoverForce * (Input.GetAxis("Horizontal")));
 	}
-
 
 
 	if(MovingHorizontally() && MovingVertically()) {
@@ -78,7 +82,7 @@ velocity = rigidbody2D.velocity;
 //shooting
 	if (Input.GetAxis("Fire1")){
 		if (Time.time >= nextShot){
-			Instantiate(shot_pref, Vector3(transform.position.x, transform.position.y + 0.5,0), Quaternion.identity);
+			Instantiate(shot_pref, Vector3(transform.position.x * 1.3, transform.position.y * 1.3, 0), transform.rotation);
 
 			nextShot = Time.time + fireRate;
 			shakeTime = Time.time;
@@ -116,7 +120,7 @@ function OnCollisionEnter2D (col : Collision2D){
 
 			for (var i = 0; i < 200; i++){
         Debug.Log("creating 200 of something");
-				Instantiate(PlayerGib_pref, Vector3(transform.position.x, transform.position.y,0), Quaternion.identity);
+				Instantiate(PlayerGib_pref, Vector3(transform.position.x, transform.position.y,0), transform.rotation);
 			}
 	}
 }
@@ -150,6 +154,12 @@ function CheckVerticalBounds(){
 		else if (transform.position.y < -HALF_WIDTH){
 			transform.position.y = -HALF_WIDTH;
 		}
+
+}
+function GetFireDirection()
+{
+
+
 
 }
 
