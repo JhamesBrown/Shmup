@@ -1,4 +1,4 @@
-﻿#pragma strict
+#pragma strict
 
 var speed : int = 15;
 
@@ -8,6 +8,11 @@ var dashDuration : float = 0.01;
 var dashModifier : int = 10;
 var dashCoolDown : float = 2;
 
+
+// 0.707 = sin(45) which would be the sum of the horizontal and vertical vertor at 45
+// TODO use equation instead  of constant if joystick supported
+static var HOVER_FORCE_MODIFIER : float = 0.707;
+static var BASE_HOVER_FORCE : int = 30;
 
 //rigidBody2D movement
 var hoverForce : int = 30;
@@ -59,18 +64,20 @@ velocity = rigidbody2D.velocity;
 		//transform.Translate(Vector3((Input.GetAxis("Horizontal")) * speed * Time.deltaTime,0,0));
 		rigidbody2D.AddForce(Vector3.right * hoverForce * (Input.GetAxis("Horizontal")));
 	}
-	
-	
-//reduce the hoverforce when 2 keys are pressed so that it doesnt move faster on diagonals
-	if(Input.GetAxis("Horizontal") != 0 && Input.GetAxis("Vertical") != 0) {
-		if (hoverForce == 30) {
-			hoverForce *= 0.7;
+
+
+
+	if(MovingHorizontally() && MovingVertically()) {
+    //reduce the hoverforce when 2 keys are pressed so that it doesnt move faster on diagonals
+		if (hoverForce == BASE_HOVER_FORCE) {
+			hoverForce *= HOVER_FORCE_MODIFIER;
 		}
 	}
 	else {
-		hoverForce = 30;
+		hoverForce = BASE_HOVER_FORCE;
 	}
-	
+
+
 // dash rewrite
 	if (dash == false){
 		if (Input.GetAxis("Dash")){
@@ -80,24 +87,24 @@ velocity = rigidbody2D.velocity;
 			renderer.material.color = Color(1,1,1);
 	}
 
-//shooting		
+//shooting
 	if (Input.GetAxis("Fire1")){
 		if (Time.time >= nextShot){
 			Instantiate(shot_pref, Vector3(transform.position.x, transform.position.y + 0.5,0), Quaternion.identity);
-	
+
 			nextShot = Time.time + fireRate;
 			shakeTime = Time.time;
 			shake = true;
 		}
-		
+
 	}
-	
 
-	
-	
 
-			
-//screen shake		
+
+
+
+
+//screen shake
 //	if (shake && Time.time < shakeTime + shakeDuration){
 //		Camera.main.transform.Translate(Vector3(Random.Range(-0.02,0.02),Random.Range(-0.02,0.02),0));
 //	}
@@ -106,22 +113,30 @@ velocity = rigidbody2D.velocity;
 //		shake = false;
 //		Camera.main.transform.position = (Vector3(transform.position.x / 3, transform.position.y / 3, -10));
 //	}
-		
+
+}
+
+function MovingHorizontally(){
+    return Input.GetAxis("Horizontal") != 0;
+}
+
+function MovingVertically(){
+    return Input.GetAxis("Vertical") != 0;
 }
 
 function OnCollisionEnter2D (col : Collision2D){
 
 	if(col.gameObject.tag =="Enemy"){
-			
+
 			Destroy(col.gameObject);
 			Destroy(gameObject);
-			
-			
+
+
 			for (var i = 0; i < 200; i++){
 				Instantiate(PlayerGib_pref, Vector3(transform.position.x, transform.position.y,0), Quaternion.identity);
 			}
 	}
-}	
+}
 
 function dashFunction(){
 	speed *= dashModifier;
@@ -134,11 +149,11 @@ function dashFunction(){
 
 //will change the sprite to the appropriate stage of movement and direction
 function spriteMovement (movementState, rotation) {
-	
+
 }
 
 
-	
+
 
 
 
