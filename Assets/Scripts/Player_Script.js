@@ -48,7 +48,7 @@ velocity = rigidbody2D.velocity;
      {
        //reset heading direction to current input
       var rotation = Quaternion();
-      rotation.SetLookRotation( Vector3( Input.GetAxis("Vertical"),Input.GetAxis("Horizontal"),0),Vector3.up);
+      rotation.SetLookRotation( Vector3(Input.GetAxis("Vertical"),0,Input.GetAxis("Horizontal")),Vector3(0,1,0));
       transform.localRotation = rotation;
     }
 
