@@ -1,12 +1,17 @@
 #pragma strict
 var shotForce : int;
+ var g:float;
 //var anim : Animator;
 
 
 function Start () {
 	shotForce = 750;
 	//anim = GetComponent(Animator);
-	rigidbody2D.AddForce(transform.rotation * Vector3.one * shotForce);
+  //Physics.IgnoreCollision(clone.collider, collider);
+
+	var relativeForce = transform.InverseTransformDirection(Vector2.up);
+  Debug.Log(relativeForce);
+  rigidbody2D.AddForce(new Vector2(relativeForce.x, relativeForce.y)*shotForce);
 }
 
 function Update () {

@@ -44,13 +44,9 @@ function Update () {
 velocity = rigidbody2D.velocity;
 
 //player movement and playable area limits
-  if(MovingVertically() || MovingHorizontally())
-     {
-       //reset heading direction to current input
-      var rotation = Quaternion();
-      rotation.SetLookRotation( Vector3(Input.GetAxis("Vertical"),0,Input.GetAxis("Horizontal")),Vector3(0,1,0));
-      transform.localRotation = rotation;
-    }
+
+
+  OrientPlayerAxis(); // orient player rotation to current input direction
 
 	if(MovingVertically()){
 		CheckVerticalBounds();
@@ -86,7 +82,7 @@ velocity = rigidbody2D.velocity;
 //shooting
 	if (Input.GetAxis("Fire1")){
 		if (Time.time >= nextShot){
-			Instantiate(shot_pref, Vector3(transform.position.x, transform.position.y , 0), rotation);
+			Instantiate(shot_pref, Vector3(transform.position.x*1.1, transform.position.y*1.1 , 0), transform.rotation);
 
 			nextShot = Time.time + fireRate;
 			shakeTime = Time.time;
@@ -94,25 +90,7 @@ velocity = rigidbody2D.velocity;
 		}
 
 	}
-
-
-
-
-
-
-//screen shake
-//	if (shake && Time.time < shakeTime + shakeDuration){
-//		Camera.main.transform.Translate(Vector3(Random.Range(-0.02,0.02),Random.Range(-0.02,0.02),0));
-//	}
-//	else
-//	{
-//		shake = false;
-//		Camera.main.transform.position = (Vector3(transform.position.x / 3, transform.position.y / 3, -10));
-//	}
-
 }
-
-
 
 function OnCollisionEnter2D (col : Collision2D){
 
@@ -160,12 +138,31 @@ function CheckVerticalBounds(){
 		}
 
 }
-function GetFireDirection()
-{
 
+function OrientPlayerAxis(){
+    if(MovingVertically() || MovingHorizontally())
+     {
+       //reset heading direction to current input
+       var fromVector2 = Vector2(0, 1);
+       var toVector2 = Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
+       //get angle between origin ie vector2.up and current player input
+       var angle = Vector2.Angle(fromVector2, toVector2);
 
-}
+       //take cross product to determine quadrant
+       var cross = Vector3.Cross(fromVector2, toVector2);
+
+       if (cross.z > 0)
+       {
+         //use quadrant knoledge to get 360 angle
+         angle = 360 - angle;
+       }
+
+      transform.rotation = Quaternion.Euler(0, 0, angle);
+    }
+
+  }
+
 
 
 
