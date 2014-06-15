@@ -1,6 +1,7 @@
 #pragma strict
 var health : int;
 var testGib_pref : Transform;
+var baseEnemy_Explosion : GameObject;
 
 function Start () {
 	health = 20;
@@ -24,6 +25,8 @@ function OnCollisionEnter2D (col : Collision2D) {
 }
 
 function onDeath() {
+
+	Instantiate (baseEnemy_Explosion,Vector2(transform.position.x, transform.position.y), Quaternion.identity);
 	for (var i = 0; i < 15; i++){
 			Instantiate(testGib_pref, Vector2( AddNoiseToXPosition(), AddNoiseToYPosition()), Quaternion.identity);
 	}
