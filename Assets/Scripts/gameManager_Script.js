@@ -2,7 +2,7 @@
 var testEnemy : GameObject;
 var nextSpawn : int;
 var spawnRate : int;
-var gameTime : int;
+var gameTime : int = 0 ;
 var paused : boolean;
 var	Enemy_test : Transform;
 
@@ -40,26 +40,16 @@ function pause (){
 	}
 }
 
-var barDisplay : float = 0;
-var pos : Vector2 = new Vector2(20,40);
-var size : Vector2 = new Vector2(60,20);
-var progressBarEmpty : Texture2D;
-var progressBarFull : Texture2D;
+
+
 function OnGUI(){
 
-	GUI.Box(Rect(Screen.width - 100, 50, 120,50),""+ gameTime);
+	GUI.Box(Rect(Screen.width - 100, 50, size.x, size.y), ""+gameTime);
 
-  GUI.BeginGroup (new Rect (Screen.width - 100, 100, size.x, size.y));
-        GUI.Box (Rect (0,0, size.x, size.y),progressBarEmpty);
 
-        // draw the filled-in part:
-        GUI.BeginGroup (new Rect (0, 0, size.x * barDisplay, size.y));
-            GUI.Box (Rect (0,0, size.x, size.y),progressBarFull);
-        GUI.EndGroup ();
-
-    GUI.EndGroup ();
 
 }
+var size : Vector2 = new Vector2(120,50);
 
 //enemy spawn functions
 function spawn(enemy : String){

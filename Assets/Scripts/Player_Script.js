@@ -2,6 +2,13 @@
 
 var speed : int = 15;
 
+
+//Health
+var Health : float = 100;
+var size : Vector2 = new Vector2(120,50);
+var progressBarEmpty : Texture2D;
+var progressBarFull : Texture2D;
+
 //dash
 var dash : boolean = false;
 var dashDuration : float = 0.01;
@@ -82,7 +89,9 @@ velocity = rigidbody2D.velocity;
 //shooting
 	if (Input.GetAxis("Fire1")){
 		if (Time.time >= nextShot){
-			Instantiate(shot_pref, Vector3(transform.position.x, transform.position.y , 0), transform.rotation);
+      var angle = GetAngleBetweenUpAndVector(velocity);
+
+			Instantiate(shot_pref, Vector3(transform.position.x, transform.position.y , 0), Quaternion.Euler(0, 0, angle));
 
 			nextShot = Time.time + fireRate;
 			shakeTime = Time.time;
@@ -142,27 +151,42 @@ function CheckVerticalBounds(){
 function OrientPlayerAxis(){
     if(MovingVertically() || MovingHorizontally())
      {
-       //reset heading direction to current input
-       var fromVector2 = Vector2(0, 1);
+
        var toVector2 = Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-
        //get angle between origin ie vector2.up and current player input
-       var angle = Vector2.Angle(fromVector2, toVector2);
-
-       //take cross product to determine quadrant
-       var cross = Vector3.Cross(fromVector2, toVector2);
-
-       if (cross.z > 0)
-       {
-         //use quadrant knoledge to get 360 angle
-         angle = 360 - angle;
-       }
+       var angle  = GetAngleBetweenUpAndVector(toVector2);
 
       transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 
   }
+function GetAngleBetweenUpAndVector(toVector2 : Vector2)
+{
 
+    var angle = Vector2.Angle(Vector2.up, toVector2);
+
+    //take cross product to determine quadrant
+    var cross = Vector3.Cross(Vector2.up, toVector2);
+
+    if (cross.z > 0)
+    {
+      //use quadrant knowledge to get 360 angle
+      angle = 360 - angle;
+    }
+  return angle;
+
+}
+
+function OnGUI(){
+
+  GUI.BeginGroup (new Rect (Screen.width - 100, 100, size.x, size.y));
+  GUI.Box (Rect (0,0, size.x, size.y),progressBarEmpty);
+  // draw the filled-in part:
+  GUI.BeginGroup (new Rect (0, 0, size.x * Health, size.y));
+  GUI.Box (Rect (0,0, size.x, size.y),progressBarFull);
+  GUI.EndGroup ();
+  GUI.EndGroup ();
+}
 
 
 
