@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a7fe33dd077d49d4e9de51105fda7255
+guid: 043829e46dbb6f54985e0425e9416ece
 TextureImporter:
   serializedVersion: 2
   mipmaps:
@@ -30,7 +30,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -40,33 +40,6 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites:
-    - name: projectile_test_orangeAngleBlade_SprSheet_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 88
-        height: 176
-      alignment: 0
-      pivot: {x: 0, y: 0}
-    - name: projectile_test_orangeAngleBlade_SprSheet_1
-      rect:
-        serializedVersion: 2
-        x: 88
-        y: 0
-        width: 88
-        height: 176
-      alignment: 0
-      pivot: {x: 0, y: 0}
-    - name: projectile_test_orangeAngleBlade_SprSheet_2
-      rect:
-        serializedVersion: 2
-        x: 176
-        y: 0
-        width: 88
-        height: 176
-      alignment: 0
-      pivot: {x: 0, y: 0}
+    sprites: []
   spritePackingTag: 
   userData: 

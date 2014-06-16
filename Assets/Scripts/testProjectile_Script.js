@@ -4,7 +4,7 @@ var shotForce : int;
 
 
 function Start () {
-	shotForce = 500;
+	shotForce = 300;
 	//anim = GetComponent(Animator);
 	rigidbody2D.AddForce(Vector3.up * shotForce);
 }
