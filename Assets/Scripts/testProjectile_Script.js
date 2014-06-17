@@ -6,8 +6,6 @@ var shotForce : int;
 
 function Start () {
 	shotForce = 700;
-	//anim = GetComponent(Animator);
-  //Physics.IgnoreCollision(clone.collider, collider);
 
 	var relativeForce = transform.InverseTransformDirection(Vector2.up);
   Debug.Log(relativeForce);
