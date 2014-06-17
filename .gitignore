@@ -13,3 +13,4 @@
 *.user
 Assets/Sprites/Projectiles.meta
 Assets/Sprites/Thumbs.db.meta
+*.meta

@@ -19,15 +19,14 @@ function Update () {
 
 function OnCollisionEnter2D (col : Collision2D) {
 
-  if(col.gameObject.tag =="Player")
+  if(col.gameObject.tag =="Player" || col.gameObject.tag =="Projectile")
   {
     //do nothing friendly fire is off
   }
   else
     {
-	//anim.SetInteger("hit", 1);
-	collider2D.isTrigger = true;
-	yield WaitForSeconds(0.1);
-	Destroy(gameObject);
+      collider2D.isTrigger = true;
+      yield WaitForSeconds(0.1);
+      Destroy(gameObject);
     }
 }
