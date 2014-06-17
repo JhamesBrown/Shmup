@@ -5,7 +5,7 @@ var shotForce : int;
 
 
 function Start () {
-	shotForce = 100;
+	shotForce = 700;
 	//anim = GetComponent(Animator);
   //Physics.IgnoreCollision(clone.collider, collider);
 
