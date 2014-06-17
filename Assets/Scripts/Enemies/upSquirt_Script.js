@@ -1,9 +1,9 @@
 ﻿#pragma strict
 
 var health : int;
-var pulseForce : int = 88;
+var pulseForce : int = 66;
 var nextPulse : int;
-var pulseInterval : int = 4;
+var pulseInterval : int = 3;
 
 var plume : GameObject;
 
