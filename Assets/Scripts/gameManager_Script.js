@@ -18,12 +18,7 @@ function Update () {
 	}
 	gameTime = Time.time;
 
-//spawning
-	if (Time.time >= nextSpawn){
-		spawn("test");
 
-		nextSpawn = Time.time + spawnRate;
-	}
 }
 
 function pause (){
@@ -51,11 +46,4 @@ function OnGUI(){
 }
 var size : Vector2 = new Vector2(120,50);
 
-//enemy spawn functions
-function spawn(enemy : String){
 
-	if (enemy == "test"){
-		Instantiate(Enemy_test, Vector2(Random.Range(-8,8),7), Quaternion.identity);
-	}
-
-}
