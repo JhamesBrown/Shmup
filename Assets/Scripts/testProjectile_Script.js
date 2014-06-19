@@ -8,7 +8,7 @@ function Start () {
 	shotForce = 700;
 
 	var relativeForce = transform.InverseTransformDirection(Vector2.up);
-  Debug.Log(relativeForce);
+  //Debug.Log(relativeForce);
   rigidbody2D.AddForce(new Vector2(relativeForce.x, relativeForce.y)*shotForce);
 }
 

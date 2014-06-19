@@ -7,16 +7,40 @@ var spawnInterval : float;
 var Enemy_test : GameObject;
 var upSquirt : GameObject;
 
+var spawnGUIon : boolean;
+
 function Start () {
 	amountinWave = 10;
 	spawnInterval = 1;
+	spawnGUIon = false;
 }
 
 function Update () {
+
+
 	if (Input.GetKeyDown("1")) {
 		waveSpawn();
+	}
+	
+	if (Input.GetKeyDown("2") && spawnGUIon == true) {
+		spawnGUIon = false;
+		Debug.Log("GUIoff");
+	}
+	if (Input.GetKeyDown("2") && spawnGUIon == false) {
+		spawnGUIon = true;
+		Debug.Log("GUIon");
 	} 
+	
 }
+
+function OnGUI () {
+	if (spawnGUIon == true) {
+		GUI.Box(Rect(100, 50, 100, 50), ""+enemyTypetoSpawn);
+		
+	}
+}
+
+
 
 function waveSpawn () {
 	for (var i : int = 0; i < amountinWave; i++) {

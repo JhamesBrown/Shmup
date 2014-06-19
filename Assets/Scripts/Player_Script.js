@@ -110,7 +110,7 @@ function OnCollisionEnter2D (col : Collision2D){
 
 
 			for (var i = 0; i < 200; i++){
-        Debug.Log("creating 200 of something");
+       // Debug.Log("creating 200 of something");
 				Instantiate(PlayerGib_pref, Vector3(transform.position.x, transform.position.y,0), transform.rotation);
 			}
 	}
