@@ -22,6 +22,8 @@ static var HOVER_FORCE_MODIFIER : float = 0.707;
 static var BASE_HOVER_FORCE : int = 12000;
 
 static var HALF_WIDTH : float = 8.5;
+static var projectileLayer : int = 8;
+static var playerLayer : int = 9;
 
 //rigidBody2D movement
 var hoverForce : int = BASE_HOVER_FORCE;
@@ -43,7 +45,8 @@ var PlayerGib_pref : Transform;
 
 
 function Start () {
-
+    Physics2D.IgnoreLayerCollision(projectileLayer, projectileLayer, true);
+  Physics2D.IgnoreLayerCollision(playerLayer, projectileLayer, true);
 }
 
 function Update () {
