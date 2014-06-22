@@ -19,12 +19,12 @@ var dashCoolDown : float = 2;
 // 0.707 = sin(45) which would be the sum of the horizontal and vertical vertor at 45
 // TODO use equation instead  of constant if joystick supported
 static var HOVER_FORCE_MODIFIER : float = 0.707;
-static var BASE_HOVER_FORCE : int = 30;
+static var BASE_HOVER_FORCE : int = 12000;
 
 static var HALF_WIDTH : float = 8.5;
 
 //rigidBody2D movement
-var hoverForce : int = 30;
+var hoverForce : int = BASE_HOVER_FORCE;
 var velocity : Vector2;
 
 //shooting
@@ -168,7 +168,7 @@ function GetAngleBetweenUpAndVector(toVector2 : Vector2)
     //take cross product to determine quadrant
     var cross = Vector3.Cross(Vector2.up, toVector2);
 
-    if (cross.z > 0)
+    if (cross.z < 0)
     {
       //use quadrant knowledge to get 360 angle
       angle = 360 - angle;
