@@ -6,9 +6,14 @@ var gameTime : int = 0 ;
 var paused : boolean;
 var	Enemy_test : Transform;
 
+var SpawnGUI : Transform;
+var SpawnGUIstaged : GameObject;
+var spawnGUIon : boolean;
+
 function Start () {
 	paused = false;
 	spawnRate = 1;
+	spawnGUIon = false;
 }
 
 function Update () {
@@ -19,6 +24,12 @@ function Update () {
 	gameTime = Time.time;
 
 
+	if (Input.GetKeyDown("`") && spawnGUIon == false) {
+		spawnGUIon = true;
+		Instantiate(SpawnGUI, Vector2.zero, Quaternion.identity);
+		Debug.Log("GUIon");
+	} 
+	
 }
 
 function pause (){
