@@ -24,7 +24,7 @@ function Update () {
 
 function OnGUI () {
 	//row 1
-	GUI.Box(Rect(GUI_X_LEFT_ALIGN, GUI_Y_TOP, GUI_WIDTH, GUI_BASE_ROW_HEIGHT), "bunch of text and vars  \n for spawning stuff");
+	GUI.Box(Rect(GUI_X_LEFT_ALIGN, GUI_Y_TOP, GUI_WIDTH, GUI_BASE_ROW_HEIGHT), "Spawn_GUI");
 	
 	//row 2
 	GUI.Box(Rect(GUI_X_LEFT_ALIGN, GUI_Y_TOP + GUI_BASE_ROW_HEIGHT, GUI_WIDTH - (GUI_BTN_WIDTH * 2 ), GUI_BASE_ROW_HEIGHT), "Amount in wave:"+ spawnManager.amountinWave);

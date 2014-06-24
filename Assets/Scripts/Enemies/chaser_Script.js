@@ -6,6 +6,7 @@ var baseEnemy_Explosion : GameObject;
 
 function Start () {
 	health = 20;
+	transform.localRotation.eulerAngles = Vector3(0,90,0);
 }
 
 function Update () {
