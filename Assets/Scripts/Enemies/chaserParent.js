@@ -11,8 +11,9 @@ var myTransform : Transform; //current transform data of this enemy
 function Start () {
 	childObject = Instantiate(chaser_Child, Vector3(transform.position.x, transform.position.y ,transform.position.z), Quaternion.identity);
 	childObject.transform.parent = transform;
+	target = GameObject.FindWithTag("Player").transform; //target the player
 }
 
 function Update () {
-	transform.LookAt (target, Vector3.right);
+	transform.LookAt (target, Vector3.forward);
 }
