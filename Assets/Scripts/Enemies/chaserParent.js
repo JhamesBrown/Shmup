@@ -14,6 +14,8 @@ function Start () {
 	target = GameObject.FindWithTag("Player").transform; //target the player
 }
 
-function Update () {
+function FixedUpdate () {
 	transform.LookAt (target, Vector3.forward);
+	transform.position = childObject.transform.position;
+	
 }

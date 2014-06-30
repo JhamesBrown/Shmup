@@ -3,17 +3,24 @@ var health : int;
 var testGib_pref : Transform;
 var baseEnemy_Explosion : GameObject;
 
+static var SPEED : int = 20;
 
 function Start () {
 	health = 20;
 	transform.localRotation.eulerAngles = Vector3(-90,0,0);
 }
 
-function Update () {
+function FixedUpdate () {
 	if (health <= 0 && collider2D != null) {
 		collider2D.isTrigger = true;
 		onDeath();
 	}
+	
+	
+	
+	rigidbody2D.AddForce(transform.TransformDirection(Vector3.down) * Time.deltaTime * SPEED);
+	
+	rigidbody2D.fixedAngle = true;
 	
 	
 }
@@ -35,7 +42,9 @@ function onDeath() {
 	for (var i = 0; i < 15; i++){
 			Instantiate(testGib_pref, Vector2( AddNoiseToXPosition(), AddNoiseToYPosition()), Quaternion.identity);
 	}
+	Destroy(transform.parent.gameObject);
 	Destroy(gameObject);
+	
 }
 
 function AddNoiseToXPosition(){
