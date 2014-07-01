@@ -182,13 +182,13 @@ function GetAngleBetweenUpAndVector(toVector2 : Vector2)
 
 function OnGUI(){
 
-  GUI.BeginGroup (new Rect (Screen.width - 100, 100, size.x, size.y));
+  //GUI.BeginGroup (new Rect (Screen.width - 100, 100, size.x, size.y));
   GUI.Box (Rect (0,0, size.x, size.y),progressBarEmpty);
   // draw the filled-in part:
-  GUI.BeginGroup (new Rect (0, 0, size.x * Health, size.y));
+  GUI.BeginGroup (new Rect (0, 0, size.x * (Health*0.1), size.y));
   GUI.Box (Rect (0,0, size.x, size.y),progressBarFull);
   GUI.EndGroup ();
-  GUI.EndGroup ();
+  //GUI.EndGroup ();
 }
 
 

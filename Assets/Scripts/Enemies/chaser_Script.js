@@ -34,6 +34,9 @@ function OnCollisionEnter2D (col : Collision2D) {
 	if(col.gameObject.tag =="Wall" && col != null) {
 		health = 0;
 	}
+	if(col.gameObject.tag =="Player" && col != null) {
+		health = 0;
+	}
 }
 
 function onDeath() {
