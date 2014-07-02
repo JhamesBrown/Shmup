@@ -3,8 +3,8 @@ guid: 62a61f1ed6d28437fb8b50ddb89c3add
 MonoImporter:
   serializedVersion: 2
   defaultReferences:
-  - progressBarEmpty: {fileID: 2800000, guid: 7930a54b054b54e4f9800b9f4df87577, type: 3}
-  - progressBarFull: {fileID: 2800000, guid: aa796bace5f0bf349b44c9b6b22d4a0d, type: 3}
+  - progressBarEmpty: {fileID: 2800000, guid: 3b7434812bacb2443b3a8c312262205e, type: 3}
+  - progressBarFull: {fileID: 2800000, guid: 5ba13428167e5cf4883425cf6cb87125, type: 3}
   - shot_pref: {instanceID: 0}
   - PlayerGib_pref: {instanceID: 0}
   executionOrder: 0

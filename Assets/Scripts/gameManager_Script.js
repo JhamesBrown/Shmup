@@ -48,13 +48,9 @@ function pause (){
 
 
 
-function OnGUI(){
-
-	GUI.Box(Rect(Screen.width - 100, 50, size.x, size.y), ""+gameTime);
-
-
-
-}
+//function OnGUI(){
+//GUI.Box(Rect(Screen.width - 100, 50, size.x, size.y), ""+gameTime);
+//}
 var size : Vector2 = new Vector2(120,50);
 
 
