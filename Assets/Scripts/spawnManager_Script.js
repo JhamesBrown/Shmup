@@ -6,6 +6,7 @@ var spawnInterval : float;
 
 var Enemy_test : GameObject;
 var upSquirt : GameObject;
+var chaser : GameObject;
 
 function Start () {
 	amountinWave = 2;
@@ -23,7 +24,7 @@ function Update () {
 
 function waveSpawn () {
 	for (var i : int = 0; i < amountinWave; i++) {
-				spawn("test");
+				spawn("chaser");
 				yield WaitForSeconds (spawnInterval);
 	}
 }
@@ -35,5 +36,8 @@ function spawn(enemy : String){
 	}
 	if (enemy == "upSquirt"){
 		Instantiate(upSquirt, Vector3(8,8,0), Quaternion.Euler(Vector3(0,0,-45)));
+	}
+	if (enemy == "chaser"){
+		Instantiate(chaser, Vector2(Random.Range(-8,8),7), Quaternion.identity);
 	}
 }

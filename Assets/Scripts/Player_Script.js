@@ -5,9 +5,12 @@ var speed : int = 15;
 
 //Health
 var Health : float = 100;
-var size : Vector2 = new Vector2(120,50);
+var size : Vector2 = new Vector2(100, 10);
 var progressBarEmpty : Texture2D;
 var progressBarFull : Texture2D;
+
+var progressBarFullStyle : GUIStyle;
+var progressBarEmptyStyle : GUIStyle;
 
 //dash
 var dash : boolean = false;
@@ -41,7 +44,7 @@ var shake : boolean = false;
 var shakeDuration : float = 0.1; //duration of hit effect
 @HideInInspector var shakeTime : float;
 
-var PlayerGib_pref : Transform;
+
 
 
 function Start () {
@@ -108,14 +111,10 @@ function OnCollisionEnter2D (col : Collision2D){
 
 	if(col.gameObject.tag =="Enemy"){
 
-			Destroy(col.gameObject);
-			Destroy(gameObject);
+			//Destroy(col.gameObject);
+			Health -= 10;
 
 
-			for (var i = 0; i < 200; i++){
-       // Debug.Log("creating 200 of something");
-				Instantiate(PlayerGib_pref, Vector3(transform.position.x, transform.position.y,0), transform.rotation);
-			}
 	}
 }
 
@@ -182,12 +181,14 @@ function GetAngleBetweenUpAndVector(toVector2 : Vector2)
 
 function OnGUI(){
 
-  GUI.BeginGroup (new Rect (Screen.width - 100, 100, size.x, size.y));
-  GUI.Box (Rect (0,0, size.x, size.y),progressBarEmpty);
+	
+	
+  GUI.BeginGroup ( Rect (Screen.width - 200, 30, size.x, size.y));
+  	GUI.Box (Rect (0,0, size.x, size.y),progressBarEmpty, progressBarEmptyStyle);
   // draw the filled-in part:
-  GUI.BeginGroup (new Rect (0, 0, size.x * Health, size.y));
-  GUI.Box (Rect (0,0, size.x, size.y),progressBarFull);
-  GUI.EndGroup ();
+  	GUI.BeginGroup ( Rect (0, 0, size.x - 100 + (Health), size.y));
+  	GUI.Box (Rect (0,0, size.x, size.y),progressBarFull, progressBarFullStyle);
+  	GUI.EndGroup ();
   GUI.EndGroup ();
 }
 
