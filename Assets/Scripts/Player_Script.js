@@ -52,7 +52,7 @@ function Start () {
   Physics2D.IgnoreLayerCollision(playerLayer, projectileLayer, true);
 }
 
-function Update () {
+function FixedUpdate () {
 
 velocity = rigidbody2D.velocity;
 
