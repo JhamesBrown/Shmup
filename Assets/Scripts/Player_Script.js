@@ -12,13 +12,6 @@ var progressBarFull : Texture2D;
 var progressBarFullStyle : GUIStyle;
 var progressBarEmptyStyle : GUIStyle;
 
-//dash
-var dash : boolean = false;
-var dashDuration : float = 0.01;
-var dashModifier : int = 10;
-var dashCoolDown : float = 2;
-
-
 // 0.707 = sin(45) which would be the sum of the horizontal and vertical vertor at 45
 // TODO use equation instead  of constant if joystick supported
 static var HOVER_FORCE_MODIFIER : float = 0.707;
@@ -31,6 +24,7 @@ static var playerLayer : int = 9;
 //rigidBody2D movement
 var hoverForce : int = BASE_HOVER_FORCE;
 var velocity : Vector2;
+
 
 //shooting
 var shot_pref : Transform;
@@ -53,6 +47,7 @@ function Start () {
 }
 
 function FixedUpdate () {
+
 
 velocity = rigidbody2D.velocity;
 
@@ -83,19 +78,12 @@ velocity = rigidbody2D.velocity;
 	}
 
 
-// dash rewrite
-	if (dash == false){
-		if (Input.GetAxis("Dash")){
-			dash = true;
-			dashFunction();
-			}
-			renderer.material.color = Color(1,1,1);
-	}
+
 
 //shooting
 	if (Input.GetAxis("Fire1")){
 		if (Time.time >= nextShot){
-      var angle = GetAngleBetweenUpAndVector(velocity);
+      var angle = GetAngleBetweenUpAndVector(Vector2.up);
 
 			Instantiate(shot_pref, Vector3(transform.position.x, transform.position.y , 0), Quaternion.Euler(0, 0, angle));
 
@@ -105,31 +93,22 @@ velocity = rigidbody2D.velocity;
 		}
 
 	}
+	
+//cap player health
+	if(Health > 100){
+		Health = 100;
+	}
 }
 
 function OnCollisionEnter2D (col : Collision2D){
 
 	if(col.gameObject.tag =="Enemy"){
-
 			//Destroy(col.gameObject);
 			Health -= 10;
-
-
 	}
-}
-
-function dashFunction(){
-	speed *= dashModifier;
-	renderer.material.color = Color(1,0.0,0.0);
-	yield WaitForSeconds(dashDuration);
-	speed /= dashModifier;
-	yield WaitForSeconds (dashCoolDown);
-	dash = false;
-}
-
-//will change the sprite to the appropriate stage of movement and direction
-function spriteMovement (movementState, rotation) {
-
+	if(col.gameObject.tag =="HealthPickUp"){
+			Health += 10;
+	}
 }
 
 //helper functions

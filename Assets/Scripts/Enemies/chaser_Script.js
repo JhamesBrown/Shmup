@@ -2,11 +2,15 @@
 var health : int;
 var testGib_pref : Transform;
 var baseEnemy_Explosion : GameObject;
+var EnemyLayer : int = 11;
+var GibsLayer : int = 12;
 
 static var SPEED : int = 20;
 
 function Start () {
-	health = 20;
+	Physics2D.IgnoreLayerCollision(GibsLayer, EnemyLayer, true);
+ 	Physics2D.IgnoreLayerCollision(EnemyLayer, GibsLayer, true);
+	health = 10;
 	transform.localRotation.eulerAngles = Vector3(-90,0,0);
 }
 
