@@ -32,17 +32,8 @@ function spawnTimer(){
 	waveSpawn(2,"upSquirt");
 	yield WaitForSeconds (5);
 	spawn("healthPickUp");
-	
-	yield WaitForSeconds (2);
-	spawn("test");
-	yield WaitForSeconds (4);
-	waveSpawn(5,"chaser");
-	yield WaitForSeconds (3);
-	spawn("test");
-	yield WaitForSeconds (4);
-	waveSpawn(2,"upSquirt");
-	yield WaitForSeconds (5);
-	spawn("healthPickUp");
+
+
 	
 }
 
