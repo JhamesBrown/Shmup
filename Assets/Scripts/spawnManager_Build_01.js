@@ -24,19 +24,30 @@ function Update () {
 }
 
 function spawnTimer(){
+	
+	
+	diaglineSpawn(8,left,17,0.5);
+	yield WaitForSeconds (1);
+	diaglineSpawn(-8,right,17,0.5);
 	yield WaitForSeconds (2);
 	diaglineSpawn(-8,right,17,0.5);
-	yield WaitForSeconds (9);
-	diaglineSpawn(8,left,17,0.5);
-	yield WaitForSeconds (9);
-	diaglineSpawn(8,left,17,0.5);
+	yield WaitForSeconds (2);
 	diaglineSpawn(-8,right,17,0.5);
+	yield WaitForSeconds (8);
+	spawn("chaser", Vector2(0,7));
+	spawn("chaser", Vector2(-4,7));
+	spawn("chaser", Vector2(-8,7));
 	
+	yield WaitForSeconds (2);
+	diaglineSpawn(8,left,17,0.01);
+	
+	yield WaitForSeconds (8);
+	spawn("healthPickUp",randomX());
 	
 	
 	
 //spawn("test");
-//	spawn("healthPickUp");
+//	spawn("healthPickUp",randomX());
 
 //	waveSpawn(5,"healthPickUp",0.2);
 //	waveSpawn(2,"upSquirt",0.2);
@@ -48,24 +59,24 @@ function spawnTimer(){
 
 function waveSpawn (amountinWave : int, type : String, spawnInterval : float) {
 	for (var i : int = 0; i < amountinWave; i++) {
-				spawn(type);
+				spawn(type,randomX());
 				yield WaitForSeconds (spawnInterval);
 	}
 }
 
-function spawn(enemy : String){
+function spawn(enemy : String, spawnPosition : Vector2){
 
 	if (enemy == "test"){
-		Instantiate(Enemy_test, Vector2(Random.Range(-8,8),7), Quaternion.identity);
+		Instantiate(Enemy_test, spawnPosition, Quaternion.identity);
 	}
 	if (enemy == "upSquirt"){
-		Instantiate(upSquirt, Vector3(8,8,0), Quaternion.Euler(Vector3(0,0,-45)));
+		Instantiate(upSquirt, spawnPosition, Quaternion.Euler(Vector3(0,0,-45)));
 	}
 	if (enemy == "chaser"){
-		Instantiate(chaser, Vector2(Random.Range(-8,8),7), Quaternion.identity);
+		Instantiate(chaser, spawnPosition, Quaternion.identity);
 	}
 	if (enemy == "healthPickUp"){
-		Instantiate(healthPickUp, Vector2(Random.Range(-8,8),7), Quaternion.identity);
+		Instantiate(healthPickUp, spawnPosition, Quaternion.identity);
 	}
 }
 
@@ -76,3 +87,7 @@ function diaglineSpawn (startPoint : int,direction : int, amountinWave : int, sp
 	}
 }
 
+function randomX () {
+	return  Vector2(Random.Range(-8,8),7);
+	
+}
