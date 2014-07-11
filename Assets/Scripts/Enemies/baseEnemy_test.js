@@ -20,7 +20,7 @@ function OnCollisionEnter2D (col : Collision2D) {
 	}
 
 	if(col.gameObject.tag =="Wall" && col != null) {
-		health = 0;
+		Destroy(gameObject);
 	}
 	if(col.gameObject.tag =="Player" && col != null) {
 		health = 0;
