@@ -44,16 +44,122 @@ function spawnTimer(){
 	yield WaitForSeconds (8);
 	spawn("healthPickUp",randomX());
 	
+	waveSpawn(2,"upSquirt",0.2);
+	waveSpawn(2,"chaser",0.2);
+	waveSpawn(8,"chaser",0.2);
+	waveSpawn(2,"chaser",0.2);
+	waveSpawn(2,"upSquirt",0.2);
+	yield WaitForSeconds (12);
+	
+	diaglineSpawn(8,left,17,0.5);
+	yield WaitForSeconds (1);
+	diaglineSpawn(-8,right,17,0.5);
+	yield WaitForSeconds (2);
+	diaglineSpawn(-8,right,17,0.5);
+	yield WaitForSeconds (2);
+	diaglineSpawn(-8,right,17,0.5);
+	yield WaitForSeconds (8);
+	spawn("chaser", Vector2(0,7));
+	spawn("chaser", Vector2(-4,7));
+	spawn("chaser", Vector2(-8,7));
+	
+	yield WaitForSeconds (2);
+	diaglineSpawn(8,left,17,0.01);
+	
+	yield WaitForSeconds (8);
+	spawn("healthPickUp",randomX());
+	
+	waveSpawn(2,"upSquirt",0.2);
+	waveSpawn(2,"chaser",0.2);
+	waveSpawn(8,"chaser",0.2);
+	waveSpawn(2,"chaser",0.2);
+	waveSpawn(2,"upSquirt",0.2);
+	yield WaitForSeconds (12);
 	
 	
+	diaglineSpawn(8,left,17,0.5);
+	yield WaitForSeconds (1);
+	diaglineSpawn(-8,right,17,0.5);
+	yield WaitForSeconds (5);
+	diaglineSpawn(8,left,17,0.5);
+	yield WaitForSeconds (4);
+	diaglineSpawn(8,left,17,0.5);
+	yield WaitForSeconds (2);
 
-//	spawn("healthPickUp",randomX());
+	diaglineSpawn(8,left,17,0.5);
+	yield WaitForSeconds (8);
+	diaglineSpawn(8,left,17,0.5);
+	yield WaitForSeconds (8);
+	spawn("chaser", Vector2(0,7));
+	spawn("chaser", Vector2(-4,7));
+	
+	yield WaitForSeconds (2);
+	diaglineSpawn(8,left,17,0.01);
+	
+	yield WaitForSeconds (8);
+	spawn("healthPickUp",randomX());
+	
+	waveSpawn(2,"upSquirt",0.2);
+	waveSpawn(2,"chaser",0.2);
 
-//	waveSpawn(5,"healthPickUp",0.2);
-//	waveSpawn(2,"upSquirt",0.2);
+	waveSpawn(2,"chaser",0.2);
+	waveSpawn(2,"upSquirt",0.2);
+	yield WaitForSeconds (12);
+	waveSpawn(2,"upSquirt",0.2);
+		
+	waveSpawn(2,"upSquirt",0.2);
+	diaglineSpawn(-8,right,17,0.5);
+	diaglineSpawn(8,left,17,0.5);
 
+	yield WaitForSeconds(8);
 
+	diaglineSpawn(8,left,17,0.5);
+	diaglineSpawn(-8,right,17,0.5);
+	
+	yield WaitForSeconds (8);
+	spawn("healthPickUp",randomX());
+	
+	waveSpawn(2,"upSquirt",0.2);
+	waveSpawn(2,"chaser",0.2);
 
+	waveSpawn(2,"chaser",0.2);
+	waveSpawn(2,"upSquirt",0.2);
+	yield WaitForSeconds (2);
+	diaglineSpawn(-8,right,17,0.5);
+	diaglineSpawn(8,left,17,0.5);
+	
+	yield WaitForSeconds (4);
+	diaglineSpawn(8,left,17,0.5);
+	diaglineSpawn(8,left,17,0.5);
+	yield WaitForSeconds (8);
+	spawn("healthPickUp",randomX());
+	
+	waveSpawn(2,"upSquirt",0.2);
+	waveSpawn(2,"chaser",0.2);
+
+	waveSpawn(2,"chaser",0.2);
+	waveSpawn(2,"upSquirt",0.2);
+	yield WaitForSeconds (2);
+	diaglineSpawn(-8,right,17,0.5);
+	diaglineSpawn(8,left,17,0.5);
+	waveSpawn(2,"chaser",0.2);
+	yield WaitForSeconds (4);
+	diaglineSpawn(8,left,17,0.5);
+	diaglineSpawn(8,left,17,0.5);
+	waveSpawn(2,"chaser",0.2);
+	yield WaitForSeconds(3);
+	waveSpawn(2,"chaser",0.2);
+	yield WaitForSeconds(3);
+	waveSpawn(2,"chaser",0.2);					
+	yield WaitForSeconds(3);
+	waveSpawn(2,"chaser",0.2);
+	diaglineSpawn(-8,right,17,0.5);
+	diaglineSpawn(8,left,17,0.5);				
+	waveSpawn(2,"chaser",0.2);
+	yield WaitForSeconds (4);
+	diaglineSpawn(8,left,17,0.5);
+	diaglineSpawn(8,left,17,0.5);
+	
 	
 }
 
@@ -86,6 +192,7 @@ function diaglineSpawn (startPoint : int, direction : int, amountinWave : int, s
 				yield WaitForSeconds (spawnInterval);
 	}
 }
+
 
 function randomX () {
 	return  Vector2(Random.Range(-8,8),7);
