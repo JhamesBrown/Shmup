@@ -1,10 +1,12 @@
 ﻿#pragma strict
 var anim : Animator;
 var health : int;
+@HideInInspector var gameManager : gameManager_Script;
 
 function Start () {
 	anim = GetComponent(Animator);
 	health = 20;
+	gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent(gameManager_Script);
 }
 
 function Update () {
@@ -24,7 +26,7 @@ function OnCollisionEnter2D (col : Collision2D) {
 	}
 	
 	if(col.gameObject.tag =="Wall" && col != null) {
-		health = 0;
+		Destroy(gameObject);
 	}
 }
 
@@ -32,4 +34,5 @@ function onDeath() {
 	anim.SetInteger("state", 2);
 	yield WaitForSeconds(0.5);
 	Destroy(gameObject);
+	gameManager.enemiesKilled ++;
 }

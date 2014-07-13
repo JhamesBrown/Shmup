@@ -30,7 +30,7 @@ var velocity : Vector2;
 
 var fireRotation : Quaternion;
 var shot_pref : Transform;
-var fireRate : float = 0.2;
+var fireRate : float;
 @HideInInspector var nextShot : float = 0.0;
 
 
@@ -43,6 +43,7 @@ var fireRate : float = 0.2;
 function Start () {
     Physics2D.IgnoreLayerCollision(projectileLayer, projectileLayer, true);
   Physics2D.IgnoreLayerCollision(playerLayer, projectileLayer, true);
+ 	fireRate = 0.15;
 }
 
 function FixedUpdate () {
@@ -162,7 +163,7 @@ function OnGUI(){
 
 	
 	
-  GUI.BeginGroup ( Rect (Screen.width - 200, 30, size.x, size.y));
+  GUI.BeginGroup ( Rect (Screen.width - 150, 30, size.x, size.y));
   	GUI.Box (Rect (0,0, size.x, size.y),progressBarEmpty, progressBarEmptyStyle);
   // draw the filled-in part:
   	GUI.BeginGroup ( Rect (0, 0, size.x - 100 + (Health), size.y));

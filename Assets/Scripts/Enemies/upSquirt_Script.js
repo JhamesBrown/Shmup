@@ -7,10 +7,12 @@ var pulseInterval : int = 3;
 
 var testGib_pref : Transform;
 var baseEnemy_Explosion : GameObject;
+@HideInInspector var gameManager : gameManager_Script;
 
 var plume : GameObject;
 
 function Start () {
+	gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent(gameManager_Script);
 	health = 20;
 }
 
@@ -50,8 +52,9 @@ function onDeath() {
 	for (var i = 0; i < 15; i++){
 			Instantiate(testGib_pref, Vector2( AddNoiseToXPosition(), AddNoiseToYPosition()), Quaternion.identity);
 	}
-	
+	gameManager.enemiesKilled ++;
 	Destroy(gameObject);
+	
 }
 
 function AddNoiseToXPosition(){

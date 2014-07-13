@@ -4,6 +4,7 @@ var testGib_pref : Transform;
 var baseEnemy_Explosion : GameObject;
 var EnemyLayer : int = 11;
 var GibsLayer : int = 12;
+@HideInInspector var gameManager : gameManager_Script;
 
 static var SPEED : int = 20;
 
@@ -12,6 +13,7 @@ function Start () {
  	Physics2D.IgnoreLayerCollision(EnemyLayer, GibsLayer, true);
 	health = 10;
 	transform.localRotation.eulerAngles = Vector3(-90,0,0);
+	gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent(gameManager_Script);
 }
 
 function FixedUpdate () {
@@ -51,7 +53,9 @@ function onDeath() {
 			Instantiate(testGib_pref, Vector2( AddNoiseToXPosition(), AddNoiseToYPosition()), Quaternion.identity);
 	}
 	Destroy(transform.parent.gameObject);
+	gameManager.enemiesKilled ++;
 	Destroy(gameObject);
+	
 	
 }
 
