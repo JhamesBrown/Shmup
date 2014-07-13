@@ -85,6 +85,7 @@ velocity = rigidbody2D.velocity;
 	}
 	if (Input.GetAxis("Fire1")>0){
 		if (Time.time >= nextShot){
+		audio.Play();
       		Instantiate(shot_pref, Vector3(transform.position.x, transform.position.y , 0), fireRotation);
 
 			nextShot = Time.time + fireRate;
