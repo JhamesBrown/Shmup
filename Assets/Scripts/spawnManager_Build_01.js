@@ -46,7 +46,7 @@ function spawnTimer(){
 	
 	
 	
-//spawn("test");
+
 //	spawn("healthPickUp",randomX());
 
 //	waveSpawn(5,"healthPickUp",0.2);
@@ -80,7 +80,7 @@ function spawn(enemy : String, spawnPosition : Vector2){
 	}
 }
 
-function diaglineSpawn (startPoint : int,direction : int, amountinWave : int, spawnInterval : float) {
+function diaglineSpawn (startPoint : int, direction : int, amountinWave : int, spawnInterval : float) {
 	for (var i : int = 0; i < amountinWave && startPoint + (i*direction) < 9 && startPoint + (i*direction) > -9 ; i++) {
 				Instantiate(Enemy_test, Vector2(startPoint + (i*direction),7), Quaternion.identity);
 				yield WaitForSeconds (spawnInterval);
@@ -89,5 +89,4 @@ function diaglineSpawn (startPoint : int,direction : int, amountinWave : int, sp
 
 function randomX () {
 	return  Vector2(Random.Range(-8,8),7);
-	
 }

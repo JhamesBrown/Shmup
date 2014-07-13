@@ -27,16 +27,15 @@ var velocity : Vector2;
 
 
 //shooting
+
+var fireRotation : Quaternion;
 var shot_pref : Transform;
 var fireRate : float = 0.2;
 @HideInInspector var nextShot : float = 0.0;
 
 
 
-//screenShake effects
-var shake : boolean = false;
-var shakeDuration : float = 0.1; //duration of hit effect
-@HideInInspector var shakeTime : float;
+
 
 
 
@@ -81,18 +80,18 @@ velocity = rigidbody2D.velocity;
 
 
 //shooting
-	if (Input.GetAxis("Fire1")){
+	if (Input.GetAxis("Fire1")== 0){
+		fireRotation = transform.rotation;
+	}
+	if (Input.GetAxis("Fire1")>0){
 		if (Time.time >= nextShot){
-      var angle = GetAngleBetweenUpAndVector(Vector2.up);
-
-			Instantiate(shot_pref, Vector3(transform.position.x, transform.position.y , 0), Quaternion.Euler(0, 0, angle));
+      		Instantiate(shot_pref, Vector3(transform.position.x, transform.position.y , 0), fireRotation);
 
 			nextShot = Time.time + fireRate;
-			shakeTime = Time.time;
-			shake = true;
 		}
 
 	}
+		
 	
 //cap player health
 	if(Health > 100){
