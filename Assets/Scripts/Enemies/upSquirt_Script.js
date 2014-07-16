@@ -9,6 +9,8 @@ var testGib_pref : Transform;
 var baseEnemy_Explosion : GameObject;
 @HideInInspector var gameManager : gameManager_Script;
 
+var rotation : Quaternion;
+
 var plume : GameObject;
 
 function Start () {
@@ -17,8 +19,10 @@ function Start () {
 }
 
 function Update () {
+
+	rotation =  transform.rotation;
 	
-	
+	pulseInterval = 3 + ((transform.position.y)*0.3);
 	
 	if (Time.time >= nextPulse) {
 		rigidbody2D.AddForce(transform.TransformDirection(Vector2.up) * pulseForce);
@@ -30,6 +34,8 @@ function Update () {
 	collider2D.isTrigger = true;
 		onDeath();
 	}
+	
+	
 }
 
 
