@@ -39,6 +39,7 @@ function spawnTimer(){
 	yield WaitForSeconds (1);
 	spawn("upSquirt", Vector2(3,-7));
 	yield WaitForSeconds (1);
+	waveSpawn(20, "upSquirt", 0.2);
 	
 	
 }

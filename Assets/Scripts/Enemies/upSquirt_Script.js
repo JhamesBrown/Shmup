@@ -4,6 +4,9 @@ var health : int;
 var pulseForce : int = 66;
 var nextPulse : int;
 var pulseInterval : int = 3;
+var bottomLimit : int;
+
+var upRightAngle = 0.0;
 
 var testGib_pref : Transform;
 var baseEnemy_Explosion : GameObject;
@@ -16,24 +19,33 @@ var plume : GameObject;
 function Start () {
 	gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent(gameManager_Script);
 	health = 20;
+	bottomLimit = Random.Range(-2,2);
 }
 
 function Update () {
 
 	rotation =  transform.rotation;
 	
-	pulseInterval = 3 + ((transform.position.y)*0.3);
+	pulseInterval = 2 + ((transform.position.y + bottomLimit)*0.3);
 	
 	if (Time.time >= nextPulse) {
 		rigidbody2D.AddForce(transform.TransformDirection(Vector2.up) * pulseForce);
 		Instantiate(plume , Vector2(transform.position.x, transform.position.y - 0.3), Quaternion.identity);
 		nextPulse = Time.time + pulseInterval;
+		
 	}
 	
 	if (health <= 0 && collider2D != null) {
 	collider2D.isTrigger = true;
 		onDeath();
 	}
+	
+	var angle : float = Mathf.LerpAngle(transform.rotation.z, upRightAngle, Time.deltaTime * 0.3);
+	transform.eulerAngles = Vector3(0, 0, angle);
+    
+    
+	
+	
 	
 	
 }
