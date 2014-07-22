@@ -30,7 +30,7 @@ function Update () {
 	
 	if (Time.time >= nextPulse) {
 		rigidbody2D.AddForce(transform.TransformDirection(Vector2.up) * pulseForce);
-		Instantiate(plume , Vector2(transform.position.x, transform.position.y - 0.3), Quaternion.identity);
+		Instantiate(plume , Vector2(transform.position.x, transform.position.y - 0.6), Quaternion.identity);
 		nextPulse = Time.time + pulseInterval;
 		
 	}
