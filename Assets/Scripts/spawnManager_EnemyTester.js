@@ -6,7 +6,7 @@ var amountinWave : int;
 
 var Enemy_test : GameObject;
 var upSquirt : GameObject;
-var chaser : GameObject;
+var chaserParent : GameObject;
 var healthPickUp : GameObject;
 static var left : int = -1;
 static var right : int = 1;
@@ -26,20 +26,12 @@ function Update () {
 function spawnTimer(){
 	
 	yield WaitForSeconds (1);
-	spawn("upSquirt", Vector2(1,-7));
+	spawn("chaser", Vector2(1,-7));
 	yield WaitForSeconds (1);
-	spawn("upSquirt", Vector2(2,-7));
+	spawn("chaser", Vector2(2,-7));
 	yield WaitForSeconds (1);
-	spawn("upSquirt", Vector2(3,-7));
-	yield WaitForSeconds (1);
-	yield WaitForSeconds (1);
-	spawn("upSquirt", Vector2(1,-7));
-	yield WaitForSeconds (1);
-	spawn("upSquirt", Vector2(2,-7));
-	yield WaitForSeconds (1);
-	spawn("upSquirt", Vector2(3,-7));
-	yield WaitForSeconds (1);
-	waveSpawn(20, "upSquirt", 0.2);
+	spawn("chaser", Vector2(3,-7));
+	
 	
 	
 }
@@ -60,7 +52,7 @@ function spawn(enemy : String, spawnPosition : Vector2){
 		Instantiate(upSquirt, spawnPosition, Quaternion.identity);
 	}
 	if (enemy == "chaser"){
-		Instantiate(chaser, spawnPosition, Quaternion.identity);
+		Instantiate(chaserParent, spawnPosition, Quaternion.identity);
 	}
 	if (enemy == "healthPickUp"){
 		Instantiate(healthPickUp, spawnPosition, Quaternion.identity);

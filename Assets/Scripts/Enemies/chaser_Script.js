@@ -12,7 +12,7 @@ function Start () {
 	Physics2D.IgnoreLayerCollision(GibsLayer, EnemyLayer, true);
  	Physics2D.IgnoreLayerCollision(EnemyLayer, GibsLayer, true);
 	health = 10;
-	transform.localRotation.eulerAngles = Vector3(-90,0,0);
+	transform.localRotation.eulerAngles = Vector3(-90,0,180);
 	gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent(gameManager_Script);
 }
 
@@ -24,7 +24,7 @@ function FixedUpdate () {
 	
 	
 	
-	rigidbody2D.AddForce(transform.TransformDirection(Vector3.down) * Time.deltaTime * SPEED);
+	rigidbody2D.AddForce(transform.TransformDirection(Vector3.up) * Time.deltaTime * SPEED);
 	
 	rigidbody2D.fixedAngle = true;
 	
