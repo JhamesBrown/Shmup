@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c0d8543f87916c741a1b7fe7f26d8916
+guid: a2c3c210ec47457479d7bd9e3a96dd54
 TextureImporter:
   serializedVersion: 2
   mipmaps:
@@ -30,7 +30,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -40,6 +40,33 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: wobble_sheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 136
+        width: 96
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: wobble_sheet_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 68
+        width: 96
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: wobble_sheet_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 96
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
   spritePackingTag: 
   userData: 
