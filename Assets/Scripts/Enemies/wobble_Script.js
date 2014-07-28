@@ -5,15 +5,32 @@ var baseEnemy_Explosion : GameObject;
 @HideInInspector var gameManager : gameManager_Script;
 var Velocity : Vector2;
 var fallingVelocityMax : float;
+var downwardForce : float;
+var anim : Animator;
 
+var state : int;
+static var LEFT : int = 0;
+static var RIGHT : int = 1;
+var sideSwapInterval : float;
+var sideSwapTime : float;
+var sideSwapForce : int;
 
 function Start () {
 	gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent(gameManager_Script);
 	health = 20;
 	fallingVelocityMax = 0.8;
+	anim = GetComponent(Animator);
+	sideSwapInterval = 2.1;
+	sideSwapTime = Time.time + sideSwapInterval;
+	sideSwapForce = 1000;
+	downwardForce = 200;
 }
 
 function Update () {
+	if (sideSwapTime < Time.time){
+		sideSwapTime = Time.time + sideSwapInterval;
+		sideSwap();
+	}
 
 	Velocity = rigidbody2D.velocity;
 	
@@ -23,7 +40,7 @@ function Update () {
 	}
 	
 	if (rigidbody2D.velocity.y > - fallingVelocityMax){
-		rigidbody2D.AddForce(Vector2.up * (-1));
+		rigidbody2D.AddForce(Vector2.up * (-1) * downwardForce);
 	}
 }
 
@@ -39,6 +56,23 @@ function OnCollisionEnter2D (col : Collision2D) {
 	if(col.gameObject.tag =="Player" && col != null) {
 		health = 0;
 	}
+}
+
+function sideSwap (){
+	if (state == LEFT) {
+		anim.SetInteger("state", 1);
+		rigidbody2D.AddForce(Vector2.right * sideSwapForce);
+		state = RIGHT;
+		
+		return;
+	}
+	if (state == RIGHT) {
+		anim.SetInteger("state", 0);
+		rigidbody2D.AddForce(Vector2.right * (-1) * sideSwapForce);
+		state = LEFT;
+		
+		return;
+	}	
 }
 
 function onDeath() {

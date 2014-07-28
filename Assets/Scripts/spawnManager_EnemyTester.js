@@ -27,7 +27,7 @@ function Update () {
 function spawnTimer(){
 	
 	yield WaitForSeconds (1);
-	diaglineSpawn(-7,right, 10, 1);
+	diaglineSpawn(-7,right, 10, 2);
 	
 	
 	
