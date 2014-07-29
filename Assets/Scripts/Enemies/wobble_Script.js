@@ -61,6 +61,7 @@ function OnCollisionEnter2D (col : Collision2D) {
 function sideSwap (){
 	if (state == LEFT) {
 		anim.SetInteger("state", 1);
+		yield WaitForSeconds (0.4);
 		rigidbody2D.AddForce(Vector2.right * sideSwapForce);
 		state = RIGHT;
 		
@@ -68,6 +69,7 @@ function sideSwap (){
 	}
 	if (state == RIGHT) {
 		anim.SetInteger("state", 0);
+		yield WaitForSeconds (0.4);
 		rigidbody2D.AddForce(Vector2.right * (-1) * sideSwapForce);
 		state = LEFT;
 		
