@@ -20,9 +20,9 @@ function Start () {
 	health = 20;
 	fallingVelocityMax = 0.8;
 	anim = GetComponent(Animator);
-	sideSwapInterval = 2.1;
+	sideSwapInterval = 1.2;
 	sideSwapTime = Time.time + sideSwapInterval;
-	sideSwapForce = 1000;
+	sideSwapForce = 5000;
 	downwardForce = 200;
 }
 

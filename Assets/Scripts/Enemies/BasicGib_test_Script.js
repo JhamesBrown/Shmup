@@ -1,11 +1,15 @@
 #pragma strict
 
-var EnemyLayer : int = 11;
-var GibsLayer : int = 12;
+static var EnemyLayer : int = 11;
+static var GibsLayer : int = 12;
+static var projectileLayer : int = 8;
+
 
 function Start () {
 	Physics2D.IgnoreLayerCollision(GibsLayer, EnemyLayer, true);
  	Physics2D.IgnoreLayerCollision(EnemyLayer, GibsLayer, true);
+ 	Physics2D.IgnoreLayerCollision(GibsLayer, projectileLayer, true);
+ 	Physics2D.IgnoreLayerCollision(projectileLayer, GibsLayer, true);
 
 	collider2D.isTrigger = false;
 	rigidbody2D.AddForce(Vector2.right * 100 * GetRandomDirection());

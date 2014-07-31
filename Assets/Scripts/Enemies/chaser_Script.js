@@ -2,8 +2,8 @@
 var health : int;
 var testGib_pref : Transform;
 var baseEnemy_Explosion : GameObject;
-var EnemyLayer : int = 11;
-var GibsLayer : int = 12;
+static var EnemyLayer : int = 11;
+static var GibsLayer : int = 12;
 @HideInInspector var gameManager : gameManager_Script;
 
 static var SPEED : int = 20;
