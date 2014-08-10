@@ -5,8 +5,8 @@ MonoImporter:
   defaultReferences:
   - progressBarEmpty: {fileID: 2800000, guid: 3b7434812bacb2443b3a8c312262205e, type: 3}
   - progressBarFull: {fileID: 2800000, guid: 5ba13428167e5cf4883425cf6cb87125, type: 3}
+  - progressBarChange: {fileID: 2800000, guid: 1de77eeb52a296c4d91a83d9b7c07312, type: 3}
   - shot_pref: {instanceID: 0}
-  - PlayerGib_pref: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

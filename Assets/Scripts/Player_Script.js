@@ -8,9 +8,12 @@ var Health : float = 100;
 var size : Vector2 = new Vector2(100, 10);
 var progressBarEmpty : Texture2D;
 var progressBarFull : Texture2D;
+var progressBarChange : Texture2D;
 
 var progressBarFullStyle : GUIStyle;
 var progressBarEmptyStyle : GUIStyle;
+var progressBarChangeStyle : GUIStyle;
+var changeAlpha : float;
 
 // 0.707 = sin(45) which would be the sum of the horizontal and vertical vertor at 45
 // TODO use equation instead  of constant if joystick supported
@@ -106,6 +109,7 @@ function OnCollisionEnter2D (col : Collision2D){
 	if(col.gameObject.tag =="Enemy"){
 			//Destroy(col.gameObject);
 			screenShake();
+			changeAlphaSet();
 			Health -= 10;
 	}
 	if(col.gameObject.tag =="HealthPickUp"){
@@ -168,7 +172,12 @@ function OnGUI(){
   	GUI.Box (Rect (0,0, size.x, size.y),progressBarEmpty, progressBarEmptyStyle);
   // draw the filled-in part:
   	GUI.BeginGroup ( Rect (0, 0, size.x - 100 + (Health), size.y));
-  	GUI.Box (Rect (0,0, size.x, size.y),progressBarFull, progressBarFullStyle);
+  		GUI.Box (Rect (0,0, size.x, size.y),progressBarFull, progressBarFullStyle);
+  	GUI.EndGroup ();
+  	GUI.BeginGroup ( Rect (size.x - 100 + (Health),0, 10, size.y));
+  		GUI.color.a = changeAlpha;
+  		GUI.Box (Rect (0,0, size.x, size.y),"", progressBarChangeStyle);
+  		
   	GUI.EndGroup ();
   GUI.EndGroup ();
 }
@@ -187,16 +196,21 @@ function screenShake() {
 			else {
 				shakeDirection = -1;
 			}
-	
 		Camera.main.transform.Translate(Vector2.right * shakeForce * shakeDirection);
 		yield WaitForSeconds (0.01);
 		i++;		
 		}
-		
 }
 
 
-
+function changeAlphaSet () {
+	changeAlpha = 1.0;
+	for (var i = 0; i <= 10;) {
+		changeAlpha -= i * 0.1;
+		yield WaitForSeconds (0.1);
+		i++;
+	} 
+}
 
 
 
