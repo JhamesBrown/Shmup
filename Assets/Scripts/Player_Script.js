@@ -105,6 +105,7 @@ function OnCollisionEnter2D (col : Collision2D){
 
 	if(col.gameObject.tag =="Enemy"){
 			//Destroy(col.gameObject);
+			screenShake();
 			Health -= 10;
 	}
 	if(col.gameObject.tag =="HealthPickUp"){
@@ -172,6 +173,27 @@ function OnGUI(){
   GUI.EndGroup ();
 }
 
+
+
+function screenShake() {
+
+	var shakeDirection : int;
+	var shakeForce : float = 0.2;
+	
+		for (var i = 0; i <= 5;){
+			if (i % 2 == 0) {
+				shakeDirection = 1;
+			}
+			else {
+				shakeDirection = -1;
+			}
+	
+		Camera.main.transform.Translate(Vector2.right * shakeForce * shakeDirection);
+		yield WaitForSeconds (0.01);
+		i++;		
+		}
+		
+}
 
 
 
