@@ -15,6 +15,8 @@ var progressBarEmptyStyle : GUIStyle;
 var progressBarChangeStyle : GUIStyle;
 var changeAlpha : float;
 
+var playerGUI : playerGUI_Script;
+
 // 0.707 = sin(45) which would be the sum of the horizontal and vertical vertor at 45
 // TODO use equation instead  of constant if joystick supported
 static var HOVER_FORCE_MODIFIER : float = 0.707;
@@ -47,6 +49,7 @@ function Start () {
     Physics2D.IgnoreLayerCollision(projectileLayer, projectileLayer, true);
   Physics2D.IgnoreLayerCollision(playerLayer, projectileLayer, true);
  	fireRate = 0.15;
+ 	playerGUI = GameObject.FindGameObjectWithTag("GameManager").GetComponent(playerGUI_Script);
 }
 
 function FixedUpdate () {
@@ -99,7 +102,7 @@ function FixedUpdate () {
 	if(Health > 100){
 		Health = 100;
 	}
-	if(Health < 0 ) {
+	if(Health <= 0 ) {
 		onDeath();
 	}
 }
@@ -109,7 +112,7 @@ function OnCollisionEnter2D (col : Collision2D){
 	if(col.gameObject.tag =="Enemy"){
 			
 			screenShake();
-			changeAlphaSet();
+			playerGUI.changeAlphaSet();
 			Health -= 10;
 	}
 	if(col.gameObject.tag =="HealthPickUp"){
@@ -205,15 +208,15 @@ function onDeath (){
 	Destroy(gameObject);
 
 }
-
-function changeAlphaSet () {
-	changeAlpha = 1.0;
-	for (var i = 0; i <= 10;) {
-		changeAlpha -= i * 0.1;
-		yield WaitForSeconds (0.1);
-		i++;
-	} 
-}
+//
+//function changeAlphaSet () {
+//	changeAlpha = 1.0;
+//	for (var i = 0; i <= 10;) {
+//		changeAlpha -= i * 0.1;
+//		yield WaitForSeconds (0.1);
+//		i++;
+//	} 
+//}
 
 
 

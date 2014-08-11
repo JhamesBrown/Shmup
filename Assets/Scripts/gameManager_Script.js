@@ -61,6 +61,6 @@ function pause (){
 //GUI.EndGroup ();
 //
 //}
-var size : Vector2 = new Vector2(120,50);
+//dvar size : Vector2 = new Vector2(120,50);
 
 
