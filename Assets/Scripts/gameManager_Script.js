@@ -10,8 +10,8 @@ var SpawnGUI : Transform;
 var SpawnGUIstaged : GameObject;
 var spawnGUIon : boolean;
 
-var statsGUIStyle : GUIStyle;
-var statsGUIStyleLabels : GUIStyle;
+//var statsGUIStyle : GUIStyle;
+//var statsGUIStyleLabels : GUIStyle;
 
 function Start () {
 	paused = false;
@@ -51,15 +51,16 @@ function pause (){
 }
 
 
-
-function OnGUI(){
-GUI.BeginGroup ( Rect (Screen.width - 150, 100, 100, 100));
-
-GUI.Box(Rect(0, 0, 100, 50), ""+enemiesKilled, statsGUIStyle);
-GUI.Box(Rect(0, 50, 100, 50), "Enemies \n Destroyed", statsGUIStyleLabels);
-GUI.EndGroup ();
-
-}
+//
+//function OnGUI(){
+//
+//GUI.BeginGroup ( Rect (Screen.width - 150, 100, 100, 100));
+//
+//GUI.Box(Rect(0, 0, 100, 50), ""+enemiesKilled, statsGUIStyle);
+//GUI.Box(Rect(0, 50, 100, 50), "Enemies \n Destroyed", statsGUIStyleLabels);
+//GUI.EndGroup ();
+//
+//}
 var size : Vector2 = new Vector2(120,50);
 
 

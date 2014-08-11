@@ -51,8 +51,7 @@ function Start () {
 
 function FixedUpdate () {
 
-
-velocity = rigidbody2D.velocity;
+	velocity = rigidbody2D.velocity;
 
 //player movement and playable area limits
 
@@ -91,10 +90,8 @@ velocity = rigidbody2D.velocity;
 		if (Time.time >= nextShot){
 		audio.Play();
       		Instantiate(shot_pref, Vector3(transform.position.x, transform.position.y , 0), fireRotation);
-
 			nextShot = Time.time + fireRate;
 		}
-
 	}
 		
 	
@@ -102,12 +99,15 @@ velocity = rigidbody2D.velocity;
 	if(Health > 100){
 		Health = 100;
 	}
+	if(Health < 0 ) {
+		onDeath();
+	}
 }
 
 function OnCollisionEnter2D (col : Collision2D){
 
 	if(col.gameObject.tag =="Enemy"){
-			//Destroy(col.gameObject);
+			
 			screenShake();
 			changeAlphaSet();
 			Health -= 10;
@@ -168,18 +168,17 @@ function OnGUI(){
 
 	
 	
-  GUI.BeginGroup ( Rect (Screen.width - 150, 30, size.x, size.y));
-  	GUI.Box (Rect (0,0, size.x, size.y),progressBarEmpty, progressBarEmptyStyle);
-  // draw the filled-in part:
-  	GUI.BeginGroup ( Rect (0, 0, size.x - 100 + (Health), size.y));
-  		GUI.Box (Rect (0,0, size.x, size.y),progressBarFull, progressBarFullStyle);
-  	GUI.EndGroup ();
-  	GUI.BeginGroup ( Rect (size.x - 100 + (Health),0, 10, size.y));
-  		GUI.color.a = changeAlpha;
-  		GUI.Box (Rect (0,0, size.x, size.y),"", progressBarChangeStyle);
-  		
-  	GUI.EndGroup ();
-  GUI.EndGroup ();
+//  GUI.BeginGroup ( Rect (Screen.width - 150, 30, size.x, size.y));
+//  	GUI.Box (Rect (0,0, size.x, size.y),progressBarEmpty, progressBarEmptyStyle);
+//  // draw the filled-in part:
+//  	GUI.BeginGroup ( Rect (0, 0, size.x - 100 + (Health), size.y));
+//  		GUI.Box (Rect (0,0, size.x, size.y),progressBarFull, progressBarFullStyle);
+//  	GUI.EndGroup ();
+//  	GUI.BeginGroup ( Rect (size.x - 100 + (Health),0, 10, size.y));
+//  		GUI.color.a = changeAlpha;
+//  		GUI.Box (Rect (0,0, size.x, size.y),"", progressBarChangeStyle);
+//  	GUI.EndGroup ();
+//  GUI.EndGroup ();
 }
 
 
@@ -202,6 +201,10 @@ function screenShake() {
 		}
 }
 
+function onDeath (){
+	Destroy(gameObject);
+
+}
 
 function changeAlphaSet () {
 	changeAlpha = 1.0;
