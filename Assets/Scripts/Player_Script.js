@@ -26,6 +26,7 @@ static var HALF_WIDTH : float = 8.5;
 static var projectileLayer : int = 8;
 static var playerLayer : int = 9;
 
+
 //rigidBody2D movement
 var hoverForce : int = BASE_HOVER_FORCE;
 var velocity : Vector2;
@@ -36,23 +37,21 @@ var velocity : Vector2;
 var fireRotation : Quaternion;
 var shot_pref : Transform;
 var fireRate : float;
+var aimPointer : Transform;
 @HideInInspector var nextShot : float = 0.0;
-
-
-
-
-
-
 
 
 function Start () {
     Physics2D.IgnoreLayerCollision(projectileLayer, projectileLayer, true);
-  Physics2D.IgnoreLayerCollision(playerLayer, projectileLayer, true);
+  	Physics2D.IgnoreLayerCollision(playerLayer, projectileLayer, true);
  	fireRate = 0.15;
  	playerGUI = GameObject.FindGameObjectWithTag("GameManager").GetComponent(playerGUI_Script);
+ 	aimPointer = transform.GetChild(0);
 }
 
 function FixedUpdate () {
+
+	aimPointer.rotation = fireRotation;
 
 	velocity = rigidbody2D.velocity;
 
@@ -94,6 +93,7 @@ function FixedUpdate () {
 		audio.Play();
       		Instantiate(shot_pref, Vector3(transform.position.x, transform.position.y , 0), fireRotation);
 			nextShot = Time.time + fireRate;
+			
 		}
 	}
 		
@@ -167,25 +167,8 @@ function GetAngleBetweenUpAndVector(toVector2 : Vector2)
 
 }
 
-function OnGUI(){
 
-	
-	
-//  GUI.BeginGroup ( Rect (Screen.width - 150, 30, size.x, size.y));
-//  	GUI.Box (Rect (0,0, size.x, size.y),progressBarEmpty, progressBarEmptyStyle);
-//  // draw the filled-in part:
-//  	GUI.BeginGroup ( Rect (0, 0, size.x - 100 + (Health), size.y));
-//  		GUI.Box (Rect (0,0, size.x, size.y),progressBarFull, progressBarFullStyle);
-//  	GUI.EndGroup ();
-//  	GUI.BeginGroup ( Rect (size.x - 100 + (Health),0, 10, size.y));
-//  		GUI.color.a = changeAlpha;
-//  		GUI.Box (Rect (0,0, size.x, size.y),"", progressBarChangeStyle);
-//  	GUI.EndGroup ();
-//  GUI.EndGroup ();
-}
-
-
-
+//will pull this out and have it an effects controller
 function screenShake() {
 
 	var shakeDirection : int;
@@ -208,15 +191,7 @@ function onDeath (){
 	Destroy(gameObject);
 
 }
-//
-//function changeAlphaSet () {
-//	changeAlpha = 1.0;
-//	for (var i = 0; i <= 10;) {
-//		changeAlpha -= i * 0.1;
-//		yield WaitForSeconds (0.1);
-//		i++;
-//	} 
-//}
+
 
 
 
